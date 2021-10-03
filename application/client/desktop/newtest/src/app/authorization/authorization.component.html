@@ -1,0 +1,27 @@
+<div style="text-align: center">
+  <h1>
+    {{ title }}
+  </h1>
+</div>
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Page</th>
+      <th>Role</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let page of pages">
+      <td>{{ page.resources }}</td>
+      <td>
+        <select class="form-control" [(ngModel)]="page.role">
+          <option *ngFor="let roles of rolelist" >{{roles.role}}</option>
+        </select>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<div class="form">
+  <button type="button" class="btn btn-primary" (click)="save()">Save</button>
+</div>

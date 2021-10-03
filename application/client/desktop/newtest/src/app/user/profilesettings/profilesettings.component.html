@@ -1,0 +1,60 @@
+<div class="profileform">
+  <form>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label class="label"><strong>First Name</strong></label>
+          <input type="text" class="form-control" placeholder="Firstname" [(ngModel)]='Userobject.firstname'
+            name="firstname">
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label class="label"><strong>Last Name</strong></label>
+          <input type="text" class="form-control" placeholder="Lastname" [(ngModel)]='Userobject.lastname'
+            name="lastname">
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label class="label"><strong>User Name</strong></label>
+          <input type="text" class="form-control" [disabled]="true" placeholder="Username"
+            [(ngModel)]='Userobject.username' name="username">
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label class="label"><strong>Password</strong></label>
+          <input type="text" readonly class="form-control" placeholder="Password" [(ngModel)]='Userobject.password'
+            name="password">
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label class="label"><strong>Email</strong></label>
+          <input type="email" class="form-control" placeholder="Email" [(ngModel)]='Userobject.email' name="email">
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label class="label"><strong>Installer Token</strong></label>
+          <input type="text" class="form-control" placeholder="Installr Token" [(ngModel)]='Userobject.installrToken'
+            name="installrToken">
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label class="label"><strong>Role</strong></label>
+          <select class="form-control" (change)="onChange($event.target.value)">
+            <option value="" selected>Select Roles</option>
+            <option *ngFor="let rolevalue of roles">{{rolevalue.role}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-sm-6">
+          <button type="submit" class="btn btn-primary" (click)="Updateuser()">Save</button>&nbsp;&nbsp;
+          <button type="submit" class="btn btn-primary" (click)="cancle()">cancel</button>
+      </div>
+    </div>
+  </form>
+</div>

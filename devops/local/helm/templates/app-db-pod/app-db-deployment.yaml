@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.app.prefix }}-app-db
+  namespace: {{ .Values.app.namespace }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: {{ .Values.app.prefix }}-app-db
+  template:
+    metadata:
+      labels:
+        name: {{ .Values.app.prefix }}-app-db
+    spec:
+      containers:
+        - name: mongo-container
+          imagePullPolicy: {{ .Values.deployment.defaultImagePullPolicy }}
+          image: {{ .Values.deployment.mongo.image }}
+          ports:
+            - name: http-port
+              containerPort: 27017
+          volumeMounts:
+            - name: mongo
+              mountPath: /data/db/
+      volumes:
+        - name: mongo
+          persistentVolumeClaim:
+            claimName: {{ .Values.app.prefix }}-app-mongo-data

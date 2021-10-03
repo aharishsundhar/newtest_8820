@@ -1,0 +1,141 @@
+.dashboardcard {
+  padding-top: 5%;
+  // background: #2903fd6b;
+}
+
+
+.card {
+  margin-right: 10%;
+  margin-top: 1%;
+  margin-left: 7%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid rgba(0, 0, 0, .125);
+  border-radius: .25rem;
+}
+
+.card-header {
+  padding: .75rem 1.25rem;
+  margin-bottom: 0;
+  border-bottom: 1px solid rgba(0, 0, 0, .125);
+}
+
+.adminimg {
+  width: 20%;
+  margin-left: 30%;
+  cursor: pointer;
+}
+
+.card-body {
+  padding: 38px;
+}
+
+.configbtn {
+  margin-bottom: 1%;
+  margin-top: 25%;
+  margin-left: -13%;
+}
+
+/* accordion styles */
+.accordion {
+  .card-header {
+    cursor: pointer;
+  }
+
+  &.heading-right {
+    .card-title {
+      position: absolute;
+      right: 50px;
+    }
+  }
+
+  &.indicator-plus {
+    .card-header {
+      &:after {
+        font-family: 'FontAwesome';
+        content: "\f068";
+        float: right;
+      }
+
+      &.collapsed {
+        &:after {
+          content: "\f067";
+        }
+      }
+    }
+  }
+
+  &.indicator-plus-before {
+    &.round-indicator {
+      .card-header {
+        &:before {
+          font-family: 'FontAwesome';
+          font-size: 14pt;
+          content: "\f056";
+          // float: left; 
+          margin-right: 10px;
+          // color: #ff9900;
+        }
+
+        &.collapsed {
+          &:before {
+            content: "\f055";
+            color: #000;
+          }
+        }
+      }
+    }
+
+    .card-header {
+      &:before {
+        font-family: 'FontAwesome';
+        content: "\f068";
+        float: left;
+      }
+
+      &.collapsed {
+        &:before {
+          content: "\f067";
+        }
+      }
+    }
+  }
+
+  &.indicator-chevron {
+    .card-header {
+      &:after {
+        font-family: 'FontAwesome';
+        content: "\f078";
+        float: right;
+      }
+
+      &.collapsed {
+        &:after {
+          content: "\f077";
+        }
+      }
+    }
+  }
+
+  &.background-none {
+    [class^="card"] {
+      background: transparent;
+    }
+  }
+
+  &.border-0 {
+    .card {
+      border: 0;
+    }
+  }
+}
+
+.btn {
+  background-color: #2196f4;
+  border-color: #2196f4;
+  color: white;
+}

@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.app.prefix }}-system-entry
+  namespace: {{ .Values.app.namespace }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: {{ .Values.app.prefix }}-system-entry
+  template:
+    metadata:
+      labels:
+        name: {{ .Values.app.prefix }}-system-entry
+    spec:
+      containers:
+        - name: {{ .Values.deployment.desktop.name }}-container
+          imagePullPolicy: {{ .Values.deployment.defaultImagePullPolicy }}
+          image: {{ .Values.deployment.desktop.image }}
+          ports:
+            - name: http-port
+              containerPort: 5000     
+        - name: {{ .Values.deployment.apigateway.name }}-container
+          imagePullPolicy: {{ .Values.deployment.defaultImagePullPolicy }}
+          image: {{ .Values.deployment.apigateway.image }}
+          ports:
+            - name: http-port
+              containerPort: 8000
+          env:
+            - name: SECURITYURL
+              value: "http://{{ .Values.app.prefix }}-app.{{ .Values.app.namespace }}.svc.cluster.local:8003"
+            - name: CAMUNDAPOD_URL
+              value: "http://{{ .Values.app.prefix }}-camunda-pod.{{ .Values.app.namespace }}.svc.cluster.local:8080"
+            - name: AUTHPROXYURL
+              value: "http://{{ .Values.app.prefix }}-app.{{ .Values.app.namespace }}.svc.cluster.local:8001"
+            - name: ADMINURL
+              value: "http://{{ .Values.app.prefix }}-app.{{ .Values.app.namespace }}.svc.cluster.local:8004"
+            - name: CAMUNDAURL
+              value: "http://{{ .Values.app.prefix }}-app.{{ .Values.app.namespace }}.svc.cluster.local:8002"
+            - name: APIGATEWAY
+              value: "http://{{ .Values.app.prefix }}-system-entry.{{ .Values.app.namespace }}.svc.cluster.local:8000"  
+            - name: MONGO_DB_URL
+              value: "mongodb://{{ .Values.app.prefix }}-app-db.{{ .Values.app.namespace }}.svc.cluster.local:27017/{{ .Values.app.prefix }}"
+            - name: SYSTEMENTRYURL
+              value: "http://{{ .Values.app.prefix }}-app.{{ .Values.app.namespace }}.svc.cluster.local:8006"

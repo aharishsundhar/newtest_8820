@@ -1,0 +1,40 @@
+<div style="text-align: center">
+</div>
+<div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 div_width">
+  <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+    <div class="form-group">
+      <label for="name">Create Role</label>
+      <input
+        type="text"
+        class="form-control"
+        name="name"
+        placeholder="Enter Role Name"
+        [(ngModel)]="name"
+        (ngModelChange)="getInputValue($event)"
+      />
+    </div>
+  </div>
+</div>
+
+<div>
+  <button type="button" class="btn" [disabled]="enablebutton" (click)="save()">
+    Add Role
+  </button>
+</div>
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Roles</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let role of rolelist">
+      <td>{{ role.role }}</td>
+      <td>
+        <button type="button" (click)="remove(role)">Remove Role</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

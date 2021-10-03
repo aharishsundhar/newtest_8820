@@ -1,0 +1,28 @@
+<div style="text-align: center">
+  <h1>Manage Users</h1>
+</div>
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Role</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of userslist">
+      <td>{{ user.email }}</td>
+      <td>
+        <select class="form-control" [(ngModel)]="user.role.role">
+          <option *ngFor="let roles of rolelist">
+            {{ roles.role }}
+          </option>
+        </select>
+      </td>
+      <td>
+        <button type="button" (click)="save(user)">Save</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

@@ -1,0 +1,89 @@
+<nav id="iflmti" class="header1">
+    <div id="if5xe1" class="container">
+        <div data-columns="1" data-gjs="navbar" id="i7nhyf" class="row no-gutters">
+<a [routerLink]="['./index.html']" id="template-i8y75" class="">
+<div data-column="1" id="ic0lkf" class="cell">
+<img id="ii0r8m" src="https://cdn.grapedrop.com/uf21ee127219d4df2973fa57c27f86999/2c72cbf188ba475bb4a41d1fc7240876_logo.png" class=""/>
+<div id="iz10bf" class="burger">
+<div id="template-i733s" class="burger-line-dark">
+</div>
+<div id="template-i7h94" class="burger-line-dark">
+</div>
+<div id="template-i8o8m" class="burger-line-dark">
+</div>
+</div>
+</div>
+</a>
+
+            <div data-column="1" id="i9mgcg" class="cell">
+                <div data-gjs="navbar-items" id="template-i0uwm" class="menu-container">
+                    <nav data-gjs="navs" id="i011z1" class="menu">
+                        <div id="MainMenu" class="">
+<a id="izdchj" class="menu-link nav-item" *ngIf='userId!=null' [routerLink]="['/home']">
+                                                                {{'source.home' | i18next}}
+                                                            
+                                                        </a><a id="izdchj"
+                            class="menu-link nav-item" *ngIf='isAdminUser' [routerLink]="['/admin']">
+                                                            {{'source.admin' | i18next}}
+                                                         </a>
+
+<a id="izdchj"
+                            class="menu-link nav-item" *ngIf='userId!=null' [routerLink]="['/sefscreen']">
+                                                            {{'source.sefscreen' | i18next}}
+                                                            </a><a id="izdchj"
+                            class="menu-link nav-item" *ngIf="isApplicable('authorization') && userId"
+                            [routerLink]="['/authorization']">
+                                                                {{'source.authorization' | i18next}}
+                                                                
+                                                            </a>
+
+<a id="izdchj"
+                            class="menu-link nav-item" *ngIf="isApplicable('manageroles') && userId"
+                            [routerLink]="['/manageroles']">
+                                                                {{'source.manageroles' | i18next}}
+                                                            </a>
+
+<a id="izdchj"
+                            class="menu-link nav-item" *ngIf="isApplicable('manageusers') && userId"
+                            [routerLink]="['/manageusers']">
+                                                                {{'source.manageusers' | i18next}}
+                                                            </a>
+ <a id="i4izs3"
+                            class="menu-link nav-item">
+                                <a style="font-size: medium;" data-toggle="dropdown" aria-expanded="false" aria-haspopup="true"
+                                class="btn dropdown-toggle" id="dropdownMenuButton"> 
+                                {{'source.selectLanguage' | i18next }} <b class="caret"></b> </a>
+
+                            <ul
+                            class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <li> <a class="dropdown-item" *ngFor="let lang of languages" (click)='confirmLangModel(lang)'> {{'languages.' + lang | i18nextCap }}</a>
+
+                                </li>
+                                </ul>
+                                </a>
+                                <button type="button" id="ipek5x" class="btn btn-primary" *ngIf='userId!=null'
+                                (click)="logout()"> <a style="color: white;">{{'source.logout' | i18next}}</a>
+
+                                </button>
+                                <button id="ipek5x" class="btn btn-primary" type="button" *ngIf='userId==null'
+                                [routerLink]="['/login']">{{'source.login' | i18next}}</button>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'top': '100px','display': confirmLangChangeModal}">
+    <div class="modal-dialog modal-sm" role="dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <p>language change cause you to re-login</p>
+            </div>
+            <div class="modal-footer" style="padding: 5px">
+                <button type="button" (click)="confirmLangChange()" class="btn btn-default">Confirm</button>
+                <button type="button" (click)="onCloseHandled()" class="btn btn-default">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>

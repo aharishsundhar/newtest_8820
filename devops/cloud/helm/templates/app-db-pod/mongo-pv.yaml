@@ -1,0 +1,13 @@
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: {{ .Values.app.prefix }}-app-mongo-data-pv
+  labels:
+    type: local
+spec:
+  capacity:
+    storage: {{ .Values.persistentVolume.mongo.storage }}
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: /data/db/

@@ -1,0 +1,136 @@
+.btn{
+    background-color: #2196f4;
+      border-color: #2196f4;
+      color: white;
+  }
+
+  table.table-bordered {
+    border: 1px solid black;
+    margin-top: 20px;
+    text-align: left;
+    table-layout: auto;
+    color: black;
+    background-color: white;
+  }
+  
+  table.table-bordered>thead>tr>th {
+    border: 1px solid black;
+    color: black;
+    background-color: darkgrey;
+  }
+  
+  table.table-bordered>tbody>tr>td {
+    border: 1px solid black;
+  }
+  
+  * {
+    box-sizing: border-box;
+  }
+  
+  body {
+    margin: 0;
+  }
+  
+  .row {
+    display: table;
+    padding-top: 10px;
+    padding-right: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    width: 100%;
+  }
+  
+  .cell {
+    width: 8%;
+    display: table-cell;
+    height: 75px;
+  }
+  
+  #template-im4h {
+    margin: 0 0 0 0;
+  }
+  
+  #template-itih {
+    width: 514px;
+    padding: 10px 10px 10px 10px;
+  }
+  
+  #template-ivnj {
+    margin: 0 0 0 0;
+  }
+  
+  #template-ikqf {
+    width: 514px;
+    padding: 10px 10px 10px 10px;
+  }
+  
+  #template-i29p {
+    margin: 0 0 0 0;
+  }
+  
+  #template-ilqq {
+    width: 514px;
+    padding: 10px 10px 10px 10px;
+  }
+  
+  #template-immc {
+    margin: 0 0 0 0;
+  }
+  
+  #template-ivcj {
+    width: 514px;
+    padding: 10px 10px 10px 10px;
+  }
+  
+  #template-iba4 {
+    margin: 0 0 0 0;
+  }
+  
+  #template-iiohv {
+    width: 514px;
+    padding: 10px 10px 10px 10px;
+  }
+  
+  .label {
+    color: #000000;
+    text-transform: capitalize;
+    font-size: 14px;
+    padding: 2.1px 6.3px 3.15px 1px;
+  }
+  
+  .input.form-control {
+    margin: 5px 0 0 0;
+  }
+  
+  .align-right {
+    float: right;
+    margin-top: -26px;
+    margin-right: 10px;
+  }
+  
+  .invalid-feedback {
+    display: unset !important;
+    width: 100%;
+    margin-top: 0.25rem;
+    font-size: 90%;
+    font-weight: bold;
+    color: #dc3545;
+  }
+  
+  #template-ibfdk {
+    background-color: #024174;
+    color: white;
+  }
+  
+  #template-i8s2n {
+    margin-left: 20px;
+    background-color: grey;
+    color: white;
+  }
+  
+  @media (max-width: 768px) {
+    .cell {
+      width: 100%;
+      display: block;
+    }
+  }

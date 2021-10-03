@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Login</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="goHome()">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </button>
+      </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+    <ion-card   class="card-login">
+        <ion-card-header>
+          <p style="text-align: center;">Login</p>
+        </ion-card-header>
+        <ion-card-content>
+            <ion-grid >
+                <ion-row justify-content-center>
+                  <ion-col align-self-center>
+                    <ion-item >
+                      <ion-label stacked>Email</ion-label>
+                      <ion-input placeholder="Email" [(ngModel)]= "user.email"></ion-input>
+                    </ion-item>
+                    <ion-item>
+                      <ion-label stacked>Password</ion-label>
+                      <ion-input placeholder="Password" type= "password" [(ngModel)]= "user.password"></ion-input>
+                    </ion-item>
+                    <div class="error" *ngIf="user">{{error}}</div>
+                    <button ion-button expand="block" class="center" (click)="login()">Login</button>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+          </ion-card-content>
+           </ion-card>
+   <!-- <ion-grid>
+    <ion-row justify-content-center>
+      <ion-col align-self-center>
+        <ion-item>
+          <ion-label stacked>Email</ion-label>
+          <ion-input [(ngModel)]= "user.email"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label stacked>Password</ion-label>
+          <ion-input type= "password" [(ngModel)]= "user.password"></ion-input>
+        </ion-item>
+        <button ion-button expand="block" class="center" (click)="login()">Login</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid> -->
+</ion-content>
+

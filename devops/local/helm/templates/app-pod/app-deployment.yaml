@@ -1,0 +1,77 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.app.prefix }}-app
+  namespace: {{ .Values.app.namespace }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: {{ .Values.app.prefix }}-app
+  template:
+    metadata:
+      labels:
+        name: {{ .Values.app.prefix }}-app
+    spec:
+      containers:
+        - name: {{ .Values.deployment.authproxy.name }}-container
+          imagePullPolicy: {{ .Values.deployment.defaultImagePullPolicy }}
+          image: {{ .Values.deployment.authproxy.image }}
+          ports:
+            - name: http-port
+              containerPort: 8001
+          env:
+            - name: {{ .Values.app.prefix }}-app-db
+              value: {{ .Values.app.prefix }}-app-db
+            - name: MONGO_DB_URL
+              value: "mongodb://{{ .Values.app.prefix }}-app-db.{{ .Values.app.prefix }}.svc.cluster.local:27017/{{ .Values.app.prefix }}"
+            - name: CAMUNDAURL
+              value: "http://{{ .Values.app.prefix }}-app.{{ .Values.app.prefix }}.svc.cluster.local:8002"          
+        - name: {{ .Values.deployment.camunda.name }}-container
+          imagePullPolicy: {{ .Values.deployment.defaultImagePullPolicy }}
+          image: {{ .Values.deployment.camunda.image }}
+          ports:
+            - name: http-port
+              containerPort: 8002
+          env:
+            - name: {{ .Values.app.prefix }}-app-db
+              value: {{ .Values.app.prefix }}-app-db
+            - name: MONGO_DB_URL
+              value: "mongodb://{{ .Values.app.prefix }}-app-db.{{ .Values.app.prefix }}.svc.cluster.local:27017/{{ .Values.app.prefix }}"
+            - name: CAMUNDAPOD_URL
+              value: "http://{{ .Values.app.prefix }}-camunda-pod.{{ .Values.app.prefix }}.svc.cluster.local:8080"
+            # - name: VAULT_API
+            #   value: "http://vault.{{ .Values.app.namespace }}.svc.cluster.local:8200"
+        - name: {{ .Values.deployment.admin.name }}-container
+          imagePullPolicy: {{ .Values.deployment.defaultImagePullPolicy }}
+          image: {{ .Values.deployment.admin.image }}
+          ports:
+            - name: http-port
+              containerPort: 8004
+          env:
+            - name: {{ .Values.app.prefix }}-app-db
+              value: {{ .Values.app.prefix }}-app-db
+            # - name: VAULT_API
+            #   value: "http://vault.{{ .Values.app.namespace }}.svc.cluster.local:8200"    
+        - name: {{ .Values.deployment.security.name }}-container
+          imagePullPolicy: {{ .Values.deployment.defaultImagePullPolicy }}
+          image: {{ .Values.deployment.security.image }}
+          ports:
+            - name: http-port
+              containerPort: 8003
+          env:
+            - name: {{ .Values.app.prefix }}-app-db
+              value: {{ .Values.app.prefix }}-app-db
+            - name: MONGO_DB_URL
+              value: "mongodb://{{ .Values.app.prefix }}-app-db.{{ .Values.app.prefix }}.svc.cluster.local:27017/{{ .Values.app.prefix }}"
+        - name: {{ .Values.deployment.SystemEntry.name }}-container
+          imagePullPolicy: {{ .Values.deployment.defaultImagePullPolicy }}
+          image: {{ .Values.deployment.SystemEntry.image }}
+          ports:
+            - name: http-port
+              containerPort: 8006
+          env:
+            - name: {{ .Values.app.prefix }}-app-db
+              value: {{ .Values.app.prefix }}-app-db
+            - name: MONGO_DB_URL
+              value: "mongodb://{{ .Values.app.prefix }}-app-db.{{ .Values.app.prefix }}.svc.cluster.local:27017/{{ .Values.app.prefix }}"

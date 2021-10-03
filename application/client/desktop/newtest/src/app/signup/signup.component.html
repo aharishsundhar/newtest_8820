@@ -1,0 +1,66 @@
+<div class="background-images">
+  <div class="container left_align">
+    <div class="row">
+      <div class="col-lg-4"></div>
+      <div class="col-lg-4">
+        <div class="main">
+          <div class="geppetto-img">
+            <img src="../../assets/img/Group2704.png">
+          </div>
+          <h3 class="signup-text-color">Please {{'source.register' | i18next}}</h3>
+          <form [formGroup]="signupform">
+            <div formGroupName="signupdata">
+              <div class="form-group">
+                <label class="text">First Name</label>
+                <input type="text" class="form-control center" formControlName="firstname" placeholder="First Name">
+                <span *ngIf="!signupform.get('signupdata.firstname').valid && signupform.get('signupdata.firstname').touched || !signupform.get('signupdata.firstname').valid && submit"
+                  class="invalid-feedback">
+                  Must be a valid First Name
+                </span>
+              </div>
+              <div class="form-group">
+                <label class="text">Last Name</label>
+                <input type="text" class="form-control center" formControlName="lastname" placeholder="Last Name">
+                <span *ngIf="!signupform.get('signupdata.lastname').valid && signupform.get('signupdata.lastname').touched || !signupform.get('signupdata.lastname').valid && submit "
+                  class="invalid-feedback">
+                  Must be a valid Last Name
+                </span>
+              </div>
+              <div class="form-group">
+                <label class="text">Email</label>
+                <input type="email" class="form-control center" formControlName="email" placeholder="Email">
+                <span *ngIf="!signupform.get('signupdata.email').valid && signupform.get('signupdata.email').touched || !signupform.get('signupdata.email').valid && submit" 
+                  class="invalid-feedback">
+                  Must be a valid Email Id
+                </span>
+              </div>
+              <div class="form-group">
+                <label class="text">Password</label>
+                <input type="password" class="form-control center" formControlName="password" placeholder="Password"
+                  [type]="show ? 'text' : 'password'" pw-show-hide="icon" (keyup.enter)="signup()">
+                <div class="input-group-append align-right">
+                    <img
+                      [src]="show ? '../../assets/img/eyeopen.png' : '../../assets/img/eyeslash.png'" height="20"
+                      (click)="hideEye()" alt="eye" />
+                </div>
+                <span *ngIf="!signupform.get('signupdata.password').valid && signupform.get('signupdata.password').touched || !signupform.get('signupdata.password').valid && submit"
+                  class="invalid-feedback">
+                  A Password must be 8 character and must have a Uppercase , Lowercase and a Special character
+                </span>
+              </div>
+            </div>
+            <div class="center">
+              <button class="btn btn login signup-button-color" (click)="signup()">
+                {{'source.submit' | i18next}}
+              </button>
+            </div>
+            <div class="rigister">
+              <p class="center signup-text-color">{{'source.alreadyReg' | i18next}}? <a routerLink="/login">{{'source.loginHere' | i18next}}</a></p>
+            </div>
+          </form>
+        </div>
+        <div class="col-lg-4"></div>
+      </div>
+      <div class="col-lg-3"></div>
+    </div>
+</div>

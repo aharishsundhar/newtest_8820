@@ -1,0 +1,111 @@
+version: "3.8"
+services:
+  mongo:
+    image: geppettotest/mongo-local:april2020
+    container_name: mongo-8820
+    restart: unless-stopped
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=password
+    volumes:
+      - newtest_8820-volume:/data/db
+    ports:
+      - "27018:27017"
+    healthcheck:
+      test: echo 'db.runCommand({serverStatus:1}).ok' | mongo admin -u root -p root --quiet | grep 1
+      interval: 10s
+      timeout: 10s
+      retries: 5
+      start_period: 40s
+  vault:
+    image: vault
+    container_name: vault-8820
+    ports:
+      - "8200:8200"
+    environment:
+        VAULT_SERVER: "http://127.0.0.1:8200"
+        VAULT_DEV_ROOT_TOKEN_ID: vault-geppetto-2021
+    cap_add:
+      - IPC_LOCK
+
+  camunda:
+    image: geppettodistribution/camunda-local:Jan2021
+    container_name: camunda-8820
+    ports:
+      - "0000:8080"
+
+  authproxy:
+    build: ../../../application/services/default_services/authproxy
+    image: authproxy-8820
+    container_name: authproxy-8820
+    ports:
+      - "0000:8001"
+    env_file: .env
+    depends_on:
+      - mongo
+      - camunda
+
+  securitymanager:
+    build: ../../../application/services/default_services/securitymanager
+    image: securitymanager-8820
+    container_name: securitymanager-8820
+    ports:
+      - "8003:8003"
+    env_file: .env
+    depends_on:
+      - mongo
+      - camunda
+
+  systemcredentialmanager:
+    build: ../../../application/services/default_services/systemcredentialmanager
+    image: systemcredentialmanager-8820
+    container_name: systemcredentialmanager-8820
+    ports:
+      - "8005:8005"
+    env_file: .env
+    depends_on:
+      - mongo
+      - vault
+
+  camundaservice:
+    build: ../../../application/services/default_services/camunda
+    image: camundaservice-8820
+    container_name: camundasvc-8820
+    ports:
+      - "8002:8002"
+    env_file: .env
+    depends_on:
+      - mongo
+      - camunda
+      - securitymanager
+
+  apigateway:
+    build: ../../../application/services/custom_services/apigateway
+    image: apigateway-8820
+    container_name: apigateway-8820
+    ports:
+      - "8000:8000"
+    env_file: .env
+    depends_on:
+      - camunda
+      - camundaservice
+      - authproxy
+      - securitymanager
+      - SystemEntry
+
+
+
+  SystemEntry: 
+    build: ../../../application/services/custom_services/SystemEntry
+    image: SystemEntry-8820
+    container_name: SystemEntry-8820
+    ports: 
+      - 8006:8006
+    env_file: .env
+    depends_on:
+      - mongo
+
+
+volumes:
+  newtest_8820-volume:
+    driver: local

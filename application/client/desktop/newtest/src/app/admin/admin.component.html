@@ -1,0 +1,25 @@
+<div class="dashboardcard">
+  <h2><label>Admin DashBoard</label></h2>
+  <div class="accordion indicator-plus-before round-indicator" id="accordionH" aria-multiselectable="true">
+    <div class="card m-b-0">
+      <div class="card-header collapsed" role="tab" id="headingOneH" href="#userManagement" data-toggle="collapse"
+        data-parent="#accordionH" aria-expanded="false" aria-controls="collapseOneH">
+        <a class="card-title">{{'source.userManagement' | i18next}}</a>
+      </div>
+      <div class="collapse" id="userManagement" role="tabpanel" aria-labelledby="headingOneH">
+        <div class="card-body">
+          <a routerLink="/usermanagement" class="btn btn-primary">{{'source.userManagement' | i18next}}</a>
+        </div>
+      </div>
+      <div class="card-header collapsed" role="tab" id="headingThreeH" href="#system_creds_admin-gjs" data-toggle="collapse"
+        data-parent="#accordionH" aria-expanded="false" aria-controls="collapseThreeH">
+        <a class="card-title">System Credentials Administration</a>
+      </div>
+      <div class="collapse" id="system_creds_admin-gjs" role="tabpanel" aria-labelledby="headingThreeH">
+        <div class="card-body">
+          <a type="button" class="btn btn-primary" routerLink="/vaultadmin">Vault Administration</a>&nbsp;&nbsp;
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

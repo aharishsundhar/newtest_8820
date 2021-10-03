@@ -1,0 +1,55 @@
+<div class="background-images">
+  <div class="container left_align">
+    <div class="row">
+      <div class="col-lg-4"></div>
+      <div class="col-lg-4">
+        <div class="main">
+          <div class="geppetto-img">
+            <img src="../../assets/img/Group2704.png">
+          </div>
+          <h3 class="signup-text-color">Please {{'source.login' | i18next}}</h3>
+          <form  [formGroup]="loginform">
+            <div formGroupName="logindata">
+              <div class="form-group">
+                <label class="text">Email</label>
+                <input type="email" class="form-control center" formControlName="email" placeholder="Email">
+                <span *ngIf="!loginform.get('logindata.email').valid && loginform.get('logindata.email').touched || !loginform.get('logindata.email').valid && submit"
+                  class="invalid-feedback">
+                  Must be a valid Email Id
+                </span>
+              </div>
+              <div class="form-group">
+                <label class="text">Password</label>
+                <input type="password" class="form-control center" formControlName="password" placeholder="Password"
+                  [type]="show ? 'text' : 'password'" pw-show-hide="icon" (keyup.enter)="Login()">
+                <div class="input-group-append align-right">
+                    <img
+                      [src]="show ? '../../assets/img/eyeopen.png' : '../../assets/img/eyeslash.png'" height="20"
+                      (click)="hideEye()" alt="eye" />
+                </div>
+                <span *ngIf="!loginform.get('logindata.password').valid && loginform.get('logindata.password').touched || !loginform.get('logindata.password').valid && submit"
+                  class="invalid-feedback">
+                  A Password must be 8 character and must have a Uppercase , Lowercase and a Special character
+                </span>
+              </div>
+            </div>
+            <div class="center">
+              <button type="submit" class="btn btn login signup-button-color" (click)="Login()">
+                {{'source.login' | i18next}}
+              </button>
+              <div style="color:red; text-align: center">
+                {{errorMessage}}
+              </div>
+            </div>
+
+            <div class="rigister">
+              <p class="center signup-text-color">{{'source.plsLogin' | i18next}}? <a
+                  routerLink="/signup">{{'source.signup' | i18next}}</a></p>
+            </div>
+          </form>
+        </div>
+        <div class="col-lg-4"></div>
+      </div>
+      <div class="col-lg-3"></div>
+    </div>
+  </div>

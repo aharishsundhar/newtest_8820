@@ -1,0 +1,23 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.app.prefix }}-camunda-pod
+  namespace: {{ .Values.app.namespace }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: {{ .Values.app.prefix }}-camunda-pod
+  template:
+    metadata:
+      labels:
+        name: {{ .Values.app.prefix }}-camunda-pod
+    spec:
+      containers:
+        - name: {{ .Values.deployment.camundapod.name }}-container
+          imagePullPolicy: {{ .Values.deployment.defaultImagePullPolicy }}
+          image: {{ .Values.deployment.camundapod.image }}
+          ports:
+            - name: http-port
+              containerPort: 8080

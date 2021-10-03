@@ -1,0 +1,138 @@
+# Default values for newtest.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+app:
+  prefix: newtest
+  namespace: newtest
+
+logging:
+  namespace: newtest-logging
+
+service:
+  type: NodePort
+  appbuilderType: NodePort
+
+  apigateway:
+    name: apigateway
+    type: NodePort
+    port: 8000  
+    targetPort: 8000
+    nodePort: 31234
+  camunda:
+    name: camunda
+    type: NodePort
+    port: 8002
+    targetPort: 8002
+  authproxy:
+    name: authproxy
+    type: NodePort
+    port: 8001
+    targetPort: 8001
+  security:
+    name: securitymanager
+    type: NodePort
+    port: 8003
+    targetPort: 8003
+  admin:
+    name: adminmanager
+    type: NodePort
+    port: 8004
+    targetPort: 8004
+  mongo:
+    name: mongo
+    type: NodePort
+    port: 27017
+    targetPort: 27017
+  desktop:
+    name: desktop
+    type: NodePort
+    port: 5000
+    targetPort: 5000
+  camundapod:
+    name: camundapod
+    type: NodePort
+    port: 8080
+    targetPort: 8080
+  SystemEntry: 
+    name: SystemEntry
+    type: NodePort
+    port: 8006
+    targetPort: 8006
+
+
+deployment:
+  defaultImagePullPolicy: IfNotPresent
+  customImagePullPolicy: Always
+  apigateway:
+     name: apigateway
+     image: geppettotest/newtest-apigateway:1.0
+  mongo:
+     name: mongo
+     image: mongo:3.2   
+  camunda:
+     name: camunda
+     image: geppettodistribution/default-camunda:2.0
+  authproxy:
+     name: authproxy
+     image: geppettodistribution/default-authproxy:2.0
+  security:
+     name: securitymanager
+     image: geppettodistribution/default-securitymanager:2.0
+  admin:
+     name: adminmanager
+     image: geppettodistribution/default-adminmanager:2.0
+  desktop:
+     name: desktop
+     image: geppettotest/newtest-desktop:1.0
+  SystemEntry: 
+    name: SystemEntry
+    image: geppettotest/newtest-SystemEntry:1.0
+
+  camundapod:
+     name: camundapod
+     image: geppettodistribution/camunda-local:Jan2021
+
+config:
+  vault:
+    rootToken: vault-newtest-2019
+
+persistentVolume:
+  mongo:
+    storage: 5Gi  
+
+persistentVolumeClaim:
+  mongo:
+    storage: 5Gi
+
+ingress:
+  enabled: false
+  annotations: {}
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  hosts:
+    - host: chart-example.local
+      paths: []
+
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
